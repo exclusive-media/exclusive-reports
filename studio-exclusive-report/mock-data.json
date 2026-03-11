@@ -1,0 +1,222 @@
+[
+    {
+        "_type": "siteSettings",
+        "title": "EXCLUSIVE",
+        "tagline": "Power. Markets. Africa.",
+        "aboutShort": "Premium media platform delivering original reporting and analysis on business, politics, technology, and regional affairs across Africa.",
+        "aboutLong": [
+            {
+                "_type": "block",
+                "children": [
+                    {
+                        "_type": "span",
+                        "text": "Exclusive (EX) is a pan-African premium media institution producing original reporting, analysis, and thought leadership on power, markets, technology, and regional transformation."
+                    }
+                ]
+            }
+        ],
+        "newsletterCopy": "Get weekly analysis on business, politics, and technology across Africa."
+    },
+    {
+        "_type": "category",
+        "title": "Business",
+        "slug": {
+            "_type": "slug",
+            "current": "business"
+        },
+        "description": "Markets, investment, trade, energy, and corporate strategy across Africa and frontier economies.",
+        "order": 1
+    },
+    {
+        "_type": "category",
+        "title": "Politics",
+        "slug": {
+            "_type": "slug",
+            "current": "politics"
+        },
+        "description": "Governance, diplomacy, conflict, and regional strategy shaping Africa’s political economy.",
+        "order": 2
+    },
+    {
+        "_type": "category",
+        "title": "Technology",
+        "slug": {
+            "_type": "slug",
+            "current": "technology"
+        },
+        "description": "Digital governance, AI, cybersecurity, telecom, and innovation in Africa’s emerging digital order.",
+        "order": 3
+    },
+    {
+        "_type": "category",
+        "title": "Africa",
+        "slug": {
+            "_type": "slug",
+            "current": "africa"
+        },
+        "description": "Regional hub covering political economy, integration, markets, and diplomacy across the continent.",
+        "order": 4
+    },
+    {
+        "_type": "category",
+        "title": "Policy",
+        "slug": {
+            "_type": "slug",
+            "current": "policy"
+        },
+        "description": "In-depth coverage on governance, reforms, and international relations (Micheal News category).",
+        "order": 5
+    },
+    {
+        "_type": "subcategory",
+        "title": "Markets",
+        "slug": {
+            "_type": "slug",
+            "current": "markets"
+        },
+        "parent": {
+            "_type": "reference",
+            "_ref": "category-business"
+        }
+    },
+    {
+        "_type": "subcategory",
+        "title": "AI",
+        "slug": {
+            "_type": "slug",
+            "current": "ai"
+        },
+        "parent": {
+            "_type": "reference",
+            "_ref": "category-technology"
+        }
+    },
+    {
+        "_type": "author",
+        "name": "Metadel Eshetu",
+        "slug": {
+            "_type": "slug",
+            "current": "metadel-eshetu"
+        },
+        "image": null,
+        "bio": [
+            {
+                "_type": "block",
+                "children": [
+                    {
+                        "_type": "span",
+                        "text": "Senior Editor covering Ethiopian economic policy and frontier markets."
+                    }
+                ]
+            }
+        ],
+        "role": "Editor",
+        "socialLinks": [
+            {
+                "_type": "socialLink",
+                "platform": "Twitter",
+                "url": "https://twitter.com/metadel"
+            },
+            {
+                "_type": "socialLink",
+                "platform": "LinkedIn",
+                "url": "https://linkedin.com/in/metadel"
+            }
+        ]
+    },
+    {
+        "_type": "article",
+        "title": "Ethiopia’s Banking Reform Tests Foreign Capital Strategy",
+        "dek": "A new policy shift opens the financial sector to foreign participation, but structural risk, regulation, and political economy will determine whether capital follows reform.",
+        "slug": {
+            "_type": "slug",
+            "current": "ethiopia-banking-reform-2026"
+        },
+        "featuredImage": null,
+        "body": [
+            {
+                "_type": "block",
+                "children": [
+                    {
+                        "_type": "span",
+                        "text": "Full article body goes here..."
+                    }
+                ]
+            }
+        ],
+        "category": {
+            "_type": "reference",
+            "_ref": "category-business"
+        },
+        "author": {
+            "_type": "reference",
+            "_ref": "author-metadel-eshetu"
+        },
+        "publishDate": "2026-03-01T08:00:00.000Z",
+        "readingTime": 8,
+        "format": "EX Report",
+        "accessLevel": "Free",
+        "featured": true
+    },
+    {
+        "_type": "podcastEpisode",
+        "title": "Market Reform and Political Risk in Ethiopia",
+        "dek": "A discussion on how policy reform, capital flows, and political economy intersect in frontier markets.",
+        "slug": {
+            "_type": "slug",
+            "current": "market-reform-political-risk-ethiopia"
+        },
+        "coverImage": null,
+        "description": [
+            {
+                "_type": "block",
+                "children": [
+                    {
+                        "_type": "span",
+                        "text": "Full episode notes..."
+                    }
+                ]
+            }
+        ],
+        "guest": {
+            "_type": "reference",
+            "_ref": "author-metadel-eshetu"
+        },
+        "duration": "42 min",
+        "youTubeUrl": "https://www.youtube.com/watch?v=example123",
+        "publishDate": "2026-02-15T10:00:00.000Z",
+        "relatedArticles": [
+            {
+                "_type": "reference",
+                "_ref": "article-ethiopia-banking-reform-2026"
+            }
+        ]
+    },
+    {
+        "_type": "product",
+        "title": "Ethiopia’s Digital Governance and AI Strategy",
+        "slug": {
+            "_type": "slug",
+            "current": "ethiopia-digital-governance-ai-strategy"
+        },
+        "coverImage": null,
+        "abstract": "This publication examines Ethiopia’s emerging digital governance framework, artificial intelligence adoption, and implications for sovereignty, markets, and security.",
+        "description": [
+            {
+                "_type": "block",
+                "children": [
+                    {
+                        "_type": "span",
+                        "text": "Full report preview..."
+                    }
+                ]
+            }
+        ],
+        "author": {
+            "_type": "reference",
+            "_ref": "author-metadel-eshetu"
+        },
+        "price": 50,
+        "file": null
+    }
+]
