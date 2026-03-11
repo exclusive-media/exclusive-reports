@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Next.js & Sanity Builds
+.next/
+dist/
+out/
+build/
+
+# Environment & OS
+.env*
+.DS_Store
+*.log
