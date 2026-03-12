@@ -7,6 +7,13 @@ import { schemaTypes } from './schemaTypes'
 import deskStructure from './structure/deskStructure'
 import { mainDocuments, locations } from './lib/presentation/resolve'
 
+const previewUrl =
+  typeof document === 'undefined'
+    ? 'https://exclusive-reports.vercel.app'
+    : window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://exclusive-reports.vercel.app'
+
 export default defineConfig({
   name: 'default',
   title: 'Exclusive',
@@ -16,20 +23,10 @@ export default defineConfig({
 
   plugins: [
     structureTool({ structure: deskStructure }),
-    visionTool(),
     presentationTool({
       previewUrl: {
-        initial: (context) => {
-          const { document } = context;
-          const slug = (document?.slug as { current?: string })?.current;
-          if (document?._type === 'article' && slug) {
-            return `/articles/${slug}`
-          }
-          if (document?._type === 'podcastEpisode' && slug) {
-            return `/podcasts/${slug}`
-          }
-          return process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-        },
+        // Use dynamically determined local/prod base URL + let resolve handle the slug
+        initial: previewUrl,
         previewMode: {
           enable: '/api/draft-mode/enable',
           disable: '/api/draft-mode/disable',
@@ -39,8 +36,13 @@ export default defineConfig({
         mainDocuments,
         locations,
       },
-      allowOrigins: ['http://localhost:3000', 'http://localhost:*'],
+      allowOrigins: [
+        'http://localhost:3000',
+        'http://localhost:*',
+        'https://exclusive-reports.vercel.app',
+      ],
     }),
+    visionTool(),
   ],
 
   schema: {

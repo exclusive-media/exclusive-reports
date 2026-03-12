@@ -1,10 +1,24 @@
+import { validatePreviewUrl } from '@sanity/preview-url-secret'
+import { client } from '@/sanity/client'
 import { draftMode } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
 
-export async function GET(request: NextRequest) {
-    (await draftMode()).enable()
-    const url = new URL(request.nextUrl)
-    const redirectTo = url.searchParams.get('redirectTo') || '/'
+const clientWithToken = client.withConfig({ 
+  token: process.env.SANITY_API_READ_TOKEN || '' 
+})
 
-    return NextResponse.redirect(new URL(redirectTo, request.url))
+export async function GET(request: Request) {
+  const { isValid, redirectTo = '/' } = await validatePreviewUrl(
+    clientWithToken,
+    request.url
+  )
+
+  if (!isValid) {
+    return new Response('Invalid secret', { status: 401 })
+  }
+
+  (await draftMode()).enable()
+  
+  // redirect is used here, throwing an internal NEXT redirect error that's handled gracefully
+  redirect(redirectTo)
 }
