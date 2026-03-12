@@ -47,7 +47,16 @@ export default {
             name: 'body',
             title: 'Article Body',
             type: 'array',
-            of: [{ type: 'block' }, { type: 'image' }],
+            of: [
+                { type: 'block' },
+                { type: 'image', options: { hotspot: true } },
+                { type: 'youtube' },
+                { type: 'callout' },
+                { type: 'quote' },
+                { type: 'divider' },
+
+
+            ],
             group: 'content',
         },
         {
