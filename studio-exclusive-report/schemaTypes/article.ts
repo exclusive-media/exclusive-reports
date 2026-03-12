@@ -49,7 +49,22 @@ export default {
             type: 'array',
             of: [
                 { type: 'block' },
-                { type: 'image', options: { hotspot: true } },
+                {
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: 'caption',
+                            type: 'string',
+                            title: 'Caption',
+                        },
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alternative Text',
+                        },
+                    ],
+                },
                 { type: 'youtube' },
                 { type: 'callout' },
                 { type: 'quote' },

@@ -40,7 +40,9 @@ export default {
             title: 'Role',
             type: 'string',
             options: {
-                list: ['Editor', 'Contributor', 'Podcast Producer', 'Guest Analyst'],
+                list: ['Editor', 'Contributor', 'Podcast Producer',
+                    'Managing Editor', 'Deputy Editor', 'Business Editor',
+                    'Political Editor', 'Analyst', 'Author', 'Researcher'],
             },
             group: 'content',
         },

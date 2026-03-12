@@ -26,7 +26,7 @@ export const locations = {
             locations: [
                 {
                     title: doc.title || 'Untitled Article',
-                    href: `/articles/${doc.slug}?preview=true`,
+                    href: `/articles/${doc.slug}`,
                 },
             ],
         }) : null,
@@ -41,7 +41,7 @@ export const locations = {
             locations: [
                 {
                     title: doc.title || 'Untitled Episode',
-                    href: `/podcasts/${doc.slug}?preview=true`,
+                    href: `/podcasts/${doc.slug}`,
                 },
             ],
         }) : null,
