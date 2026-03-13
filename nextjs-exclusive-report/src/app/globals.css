@@ -4,11 +4,58 @@
 @import "@heroui/styles";
 @import "../themes/ocean.css" layer(theme);
 
+/* ============================================= */
+/* Font Loading & Overrides – The Power Room      */
+/* ============================================= */
+@layer base {
+  :root {
+    /* Map next/font/google variables to semantic names */
+    --font-display: var(--font-libre-baskerville), serif;
+    /* Main headlines – elegant serif */
+    --font-heading: var(--font-playfair-display), serif;
+    /* Deks, sub-headlines */
+    --font-body: var(--font-source-sans-3), var(--font-noto-ethiopic), system-ui, sans-serif;
+
+    /* Override HeroUI / Geist default to use our body font everywhere */
+    --font-sans: var(--font-body);
+    --font-mono: var(--font-geist-mono);
+    /* keep mono if you use code blocks */
+  }
+
+  /* Apply font families via classes or elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-heading,
+  .dek,
+  /* future dek component */
+  .subheadline {
+    font-family: var(--font-heading);
+  }
+
+  body,
+  p,
+  li,
+  span,
+  div:not([class*="font-"]) {
+    font-family: var(--font-body);
+  }
+}
+
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  /* Remove or override old Geist defaults if conflicting */
+  --font-sans: var(--font-body);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Keep your body rule – now uses the updated --font-sans */
 body {
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
