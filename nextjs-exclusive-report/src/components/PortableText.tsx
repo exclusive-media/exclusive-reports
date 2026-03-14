@@ -3,13 +3,16 @@
 import { PortableText, PortableTextReactComponents } from '@portabletext/react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import {
-    Card,
-    Separator,
-    Alert,
-    Link,
-} from '@heroui/react' // HeroUI v3 import path (adjust if your package is different)
+import { Card, Separator, Alert, Link } from '@heroui/react'
 import { urlForImage } from '@/sanity/client'
+import { GalleryEmbed } from './ui/molecules/embeds/GalleryEmbed'
+import { ImageWithHotspotsEmbed } from './ui/molecules/embeds/ImageWithHotspotsEmbed'
+import { StatsEmbed } from './ui/molecules/embeds/StatsEmbed'
+import { SummaryListEmbed } from './ui/molecules/embeds/SummaryListEmbed'
+import { PromoEmbed } from './ui/molecules/embeds/PromoEmbed'
+import { AdPlaceholderEmbed } from './ui/molecules/embeds/AdPlaceholderEmbed'
+import { RecommendedReadingEmbed } from './ui/molecules/embeds/RecommendedReadingEmbed'
+import { Text } from './ui/atoms/typography/Text'
 
 // HeroUI v3 components we will use for rich rendering
 const components: Partial<PortableTextReactComponents> = {
@@ -41,7 +44,7 @@ const components: Partial<PortableTextReactComponents> = {
     types: {
         // 1. Image
         image: ({ value }) => {
-            const imageUrl = urlForImage(value)?.width(1200).url()
+            const imageUrl = urlForImage(value)
             if (!imageUrl) return null
 
             return (
@@ -100,17 +103,16 @@ const components: Partial<PortableTextReactComponents> = {
             const variant = variantMap[value.variant || 'info'] ?? variantMap.info
 
             return (
-                <Alert
+                <Text
                     color={variant.color as any}
-                    className="my-10 border-l-4"
+                    className="text-lg text-neutral-600 dark:text-white border-l-4"
                     title={value.title || undefined}
                 >
                     {/* This is the important fix */}
-                    <ArticlePortableText value={value.body} className="text-sm prose dark:prose-invert" />
-                </Alert>
+                    <ArticlePortableText value={value.body} className="text-sm prose dark:prose-invert text-neutral-600 dark:text-white" />
+                </Text>
             )
         },
-        // 4. Pull Quote
         // 4. Pull Quote
         quote: ({ value }) => (
             <motion.blockquote
@@ -128,6 +130,27 @@ const components: Partial<PortableTextReactComponents> = {
         ),
         // 5. Divider
         divider: () => <Separator className="my-12" />,
+
+        // 6. Gallery
+        gallery: ({ value }) => <GalleryEmbed {...value} />,
+
+        // 7. Image With Hotspots
+        imageWithHotspots: ({ value }) => <ImageWithHotspotsEmbed {...value} />,
+
+        // 8. Stats
+        stats: ({ value }) => <StatsEmbed {...value} />,
+
+        // 9. Summary List
+        summaryList: ({ value }) => <SummaryListEmbed {...value} />,
+
+        // 10. Promo
+        promo: ({ value }) => <PromoEmbed {...value} />,
+
+        // 11. Ad Placeholder
+        adPlaceholder: ({ value }) => <AdPlaceholderEmbed {...value} />,
+
+        // 12. Recommended Reading
+        recommendedReading: ({ value }) => <RecommendedReadingEmbed {...value} />,
     },
 
     // List styles (HeroUI friendly)

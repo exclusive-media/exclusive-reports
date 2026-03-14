@@ -69,6 +69,14 @@ export default {
                 { type: 'callout' },
                 { type: 'quote' },
                 { type: 'divider' },
+                { type: 'gallery' },
+                { type: 'imageWithHotspots' },
+                { type: 'summaryList' },
+                { type: 'stats' },
+                { type: 'promo' },
+                { type: 'adPlaceholder' },
+                { type: 'recommendedReading' },
+
 
 
             ],

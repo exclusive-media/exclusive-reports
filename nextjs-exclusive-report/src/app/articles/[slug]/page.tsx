@@ -1,4 +1,6 @@
 import ArticlePortableText from '@/components/PortableText'
+import { Dek } from '@/components/ui/atoms/typography/Dek'
+import { Heading } from '@/components/ui/atoms/typography/Heading'
 import { getArticle } from '@/sanity/lib/article'
 
 interface Props {
@@ -33,14 +35,14 @@ export default async function ArticlePage({ params }: Props) {
                     {article.readingTime && <span>• {article.readingTime} min read</span>}
                 </div>
 
-                <h1 className="text-5xl font-bold tracking-tighter leading-tight text-neutral-900 dark:text-white">
+                <Heading level="h1" variant="display" >
                     {article.title}
-                </h1>
+                </Heading>
 
                 {article.dek && (
-                    <p className="mt-6 text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <Dek className="mt-6 text-xl leading-relaxed">
                         {article.dek}
-                    </p>
+                    </Dek>
                 )}
             </div>
 

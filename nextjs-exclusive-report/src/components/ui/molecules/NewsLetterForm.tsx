@@ -85,18 +85,20 @@ export function NewsletterForm({
                                 required
                                 disabled={status === "loading"}
                                 className="flex-1"
-                                variant="bordered"
-                                classNames={{
-                                    input: "bg-transparent",
-                                    inputWrapper: "border-border/60 hover:border-accent focus-within:border-accent transition-colors h-12"
-                                }}
+                                variant="primary"
+                                {...({
+                                    classNames: {
+                                        input: "bg-transparent",
+                                        inputWrapper: "border-border/60 hover:border-accent focus-within:border-accent transition-colors h-12"
+                                    }
+                                } as any)}
                             />
 
                             <Button
                                 type="submit"
                                 variant="gold"
                                 size="lg"
-                                disabled={status === "loading"}
+                                isDisabled={status === "loading"}
                                 className="min-w-[140px]"
                             >
                                 {status === "loading" ? (
@@ -109,9 +111,9 @@ export function NewsletterForm({
                                 )}
                             </Button>
                         </form>
-                        
+
                         {status === "error" && (
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-xs text-danger mt-2 text-center"

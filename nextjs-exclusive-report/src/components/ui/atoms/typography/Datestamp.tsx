@@ -1,6 +1,6 @@
 // src/components/ui/atoms/DateStamp.tsx
-import { format } from "date-fns";
-import { cn } from "@/lib/cn";
+import { format, isValid } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface DateStampProps {
     date: string | Date;
@@ -10,6 +10,11 @@ interface DateStampProps {
 
 export function DateStamp({ date, readingTime, className }: DateStampProps) {
     const d = new Date(date);
+    
+    if (!isValid(d)) {
+        return null; // Don't render anything for invalid dates
+    }
+
     const formattedDate = format(d, "MMM d, yyyy");
 
     return (

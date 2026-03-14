@@ -58,9 +58,9 @@ export default function Preview() {
 
     return (
         <div className="container mx-auto py-24 px-4 space-y-32 max-w-6xl">
-            
+
             {/* ── PHASE 1: ATOMS ── */}
-            
+
             <section className="space-y-12">
                 <div className="space-y-4">
                     <Badge variant="gold" className="mb-4">Phase 1 — Atoms</Badge>
@@ -190,10 +190,10 @@ export default function Preview() {
                             />
                         </div>
                         <div className="lg:col-span-8">
-                            <RelatedArticlesList 
+                            <RelatedArticlesList
                                 title="Trending Headlines"
                                 variant="compact"
-                                articles={[...sampleArticles, ...sampleArticles]} 
+                                articles={[...sampleArticles, ...sampleArticles]}
                                 maxItems={4}
                             />
                         </div>
@@ -211,7 +211,7 @@ export default function Preview() {
                             <div className="space-y-6 bg-default/5 p-6 rounded-2xl border border-border/40">
                                 <div className="space-y-2">
                                     <Label>Default / Large Hero</Label>
-                                    <HeroMeta 
+                                    <HeroMeta
                                         size="large"
                                         format="EX REPORT"
                                         category="Geopolitics"
@@ -223,7 +223,7 @@ export default function Preview() {
                                 <Separator />
                                 <div className="space-y-2">
                                     <Label>Compact / Feed</Label>
-                                    <HeroMeta 
+                                    <HeroMeta
                                         size="compact"
                                         category="Economy"
                                         publishedAt={new Date()}
@@ -236,9 +236,9 @@ export default function Preview() {
                                 <Heading level="h2" variant="section">Social Engagement</Heading>
                                 <div className="flex items-center justify-between bg-default/5 p-6 rounded-2xl border border-border/40">
                                     <Text className="font-medium">Share this article</Text>
-                                    <ShareButtons 
-                                        url="https://exclusive-report.com/articles/geopolitics" 
-                                        title="The Geopolitics of the Red Sea" 
+                                    <ShareButtons
+                                        url="https://exclusive-report.com/articles/geopolitics"
+                                        title="The Geopolitics of the Red Sea"
                                     />
                                 </div>
                             </div>
@@ -256,9 +256,9 @@ export default function Preview() {
 
                 <div className="space-y-12">
                     <Heading level="h2" variant="section">Related Content Grids</Heading>
-                    <RelatedArticlesList 
+                    <RelatedArticlesList
                         variant="grid"
-                        articles={[...sampleArticles, ...sampleArticles, ...sampleArticles]} 
+                        articles={[...sampleArticles, ...sampleArticles, ...sampleArticles]}
                     />
                 </div>
 
@@ -266,9 +266,9 @@ export default function Preview() {
                 <div className="space-y-12">
                     <Heading level="h2" variant="section">Molecule Loading States</Heading>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <ArticleCard isLoading />
-                        <PodcastTeaser isLoading variant="grid" />
-                        <ArticleCard isLoading variant="horizontal" />
+                        <ArticleCard isLoading title={''} slug={''} publishedAt={''} />
+                        <PodcastTeaser isLoading variant="grid" episodeTitle={''} slug={''} />
+                        <ArticleCard isLoading variant="horizontal" title={''} slug={''} publishedAt={''} />
                     </div>
                 </div>
             </section>

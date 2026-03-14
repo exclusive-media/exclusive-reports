@@ -52,6 +52,8 @@ export function ArticleCard({
     const isFeatured = variant === "featured";
     const isHorizontal = variant === "horizontal";
 
+    const articleSlug = typeof slug === "string" ? slug : (slug as any)?.current;
+
     return (
         <motion.div
             initial="hidden"
@@ -60,7 +62,7 @@ export function ArticleCard({
             variants={fadeInVariants}
             className="group h-full"
         >
-            <Link href={`/articles/${slug}`} className="block h-full">
+            <Link href={`/articles/${articleSlug}`} className="block h-full">
                 <Card
                     variant={isFeatured ? "featured" : "default"}
                     className={cn(
@@ -101,10 +103,10 @@ export function ArticleCard({
                             <div className="flex flex-wrap items-center gap-2">
                                 {format && (
                                     <div className="flex items-center gap-1.5">
-                                        <Icon 
-                                            name={format === "EX REPORT" ? "Shield" : format === "ANALYSIS" ? "LineChart" : "Feather"} 
-                                            size={14} 
-                                            className="text-gold" 
+                                        <Icon
+                                            name={format === "EX REPORT" ? "Shield" : format === "ANALYSIS" ? "LineChart" : "Feather"}
+                                            size={14}
+                                            className="text-gold"
                                         />
                                         <Badge variant="gold">{format}</Badge>
                                     </div>

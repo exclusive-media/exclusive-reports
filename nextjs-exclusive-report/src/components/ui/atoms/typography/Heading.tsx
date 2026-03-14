@@ -17,7 +17,7 @@ export function Heading({
     children,
     ...props
 }: HeadingProps) {
-    const Comp = level as keyof JSX.IntrinsicElements;
+    const Comp = level;
 
     const variantStyles = {
         display: "font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight",
@@ -33,7 +33,7 @@ export function Heading({
                 variantStyles[variant],
                 className
             )}
-            {...props}
+            {...(props as any)}
         >
             {children}
         </Comp>

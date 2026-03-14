@@ -1,16 +1,10 @@
 import { groq } from 'next-sanity'
 
-/**
- * Get single article by slug
- * Optimized: Only fetches what we need for the article page
- * Uses reference expansion (author->, category->)
- */
 export const getArticleBySlug = groq`
   *[_type == "article" && slug.current == $slug][0]{
     _id,
     title,
     dek,
-    body,
     publishDate,
     readingTime,
     format,
@@ -27,13 +21,63 @@ export const getArticleBySlug = groq`
     },
     "category": category->{
       title,
-      slug
+      "slug": slug.current
     },
     "relatedArticles": relatedArticles[0...3]->{
       title,
-      slug,
+      "slug": slug.current,
       dek,
-      "image": featuredImage
+      "publishedAt": publishDate,
+      "mainImage": featuredImage.asset->{ url },
+      readingTime,
+      "author": author->{ name, image }
+    },
+    body[] {
+      ...,
+      _type == "gallery" => {
+        layout,
+        images[]
+      },
+      _type == "imageWithHotspots" => {
+        image,
+        hotspots[]
+      },
+      _type == "stats" => {
+        items
+      },
+      _type == "summaryList" => {
+        title,
+        items 
+      }, 
+      _type == "promo" => {
+        title,
+        description,
+        image,
+        link,
+        buttonText,
+        variant
+      }, 
+      _type == "adPlaceholder" => {
+         title,
+         description,
+         image,
+         link,
+         buttonText,
+         variant
+      }, 
+      _type == "recommendedReading" => {
+         title,
+         articles[]->{
+            title,
+            "slug": slug.current,
+            dek,
+            "publishedAt": publishDate,
+            "mainImage": featuredImage.asset->{ url },
+            readingTime,
+            "author": author->{ name, image }
+         }
+      } 
     }
-  }
+  
+    }
 `
