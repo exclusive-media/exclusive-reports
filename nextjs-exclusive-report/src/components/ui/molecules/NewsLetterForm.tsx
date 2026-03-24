@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Input } from "@heroui/react";
 import { Loader2 } from "lucide-react";
@@ -58,16 +58,16 @@ export function NewsletterForm({
 
             <AnimatePresence mode="wait">
                 {status === "success" ? (
-                    <motion.div
+                    <m.div
                         key="success"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="text-center p-4 rounded-xl bg-success/10 text-success font-medium border border-success/20"
                     >
                         {successMessage}
-                    </motion.div>
+                    </m.div>
                 ) : (
-                    <motion.div
+                    <m.div
                         key="form-container"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -86,12 +86,7 @@ export function NewsletterForm({
                                 disabled={status === "loading"}
                                 className="flex-1"
                                 variant="primary"
-                                {...({
-                                    classNames: {
-                                        input: "bg-transparent",
-                                        inputWrapper: "border-border/60 hover:border-accent focus-within:border-accent transition-colors h-12"
-                                    }
-                                } as any)}
+
                             />
 
                             <Button
@@ -113,15 +108,15 @@ export function NewsletterForm({
                         </form>
 
                         {status === "error" && (
-                            <motion.p
+                            <m.p
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-xs text-danger mt-2 text-center"
                             >
                                 {errorMessage}
-                            </motion.p>
+                            </m.p>
                         )}
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
 

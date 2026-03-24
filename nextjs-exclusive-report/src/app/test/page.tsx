@@ -21,6 +21,11 @@ import { HeroMeta } from '@/components/ui/molecules/HeroMeta';
 import { NewsletterForm } from '@/components/ui/molecules/NewsLetterForm';
 import { ShareButtons } from '@/components/ui/molecules/ShareButtons';
 import { RelatedArticlesList } from '@/components/ui/molecules/RelatedArticlesList';
+import { RevealText } from '@/lib/motion/RevealText';
+import { HeroEditorialZone } from '@/components/ui/organism/Home/HeroEditorialZone';
+import { heroEditorialZoneMock } from '@/mocks/heroEditorialZone.mock';
+import { SectionContainer } from '@/components/layouts/SectionContainer';
+import { PageContainer } from '@/components/layouts/PageContainer';
 
 export default function Preview() {
     const sampleArticles = [
@@ -160,15 +165,28 @@ export default function Preview() {
                 {/* Article Cards Grid */}
                 <div className="space-y-12">
                     <Heading level="h2" variant="section">ArticleCard & Podcast Elements</Heading>
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
                         <div className="md:col-span-8">
                             <ArticleCard
                                 variant="featured"
                                 {...sampleArticles[0]}
                             />
                         </div>
-                        <div className="md:col-span-4 flex flex-col gap-8">
-                            <ArticleCard {...sampleArticles[1]} />
+                        <div className="md:col-span-4 flex flex-col gap-12">
+                            {/* Minimal Variant (New) */}
+                            <div className="space-y-4">
+                                <Label className="text-accent underline underline-offset-4">New: Minimalist (Inline)</Label>
+                                <ArticleCard 
+                                    variant="minimal"
+                                    title="New 'Critical Minerals' framework proposed for AU-EU partnership."
+                                    slug="critical-minerals-framework"
+                                    author={{ name: "Siladitya Ray", role: "Forbes Staff" }}
+                                    categories={["Business"]}
+                                    publishedAt={new Date(Date.now() - 3 * 60 * 60 * 1000)} // 3 hours ago
+                                />
+                            </div>
+                            
+                            <ArticleCard {...sampleArticles[1]} variant="horizontal" />
                             <ArticleCard {...sampleArticles[2]} />
                         </div>
                     </div>
@@ -271,6 +289,24 @@ export default function Preview() {
                         <ArticleCard isLoading variant="horizontal" title={''} slug={''} publishedAt={''} />
                     </div>
                 </div>
+
+                <Separator variant="editorial" />
+
+                {/* ── PHASE 3: ORGANISMS ── */}
+                <section className="space-y-32">
+                    <div className="space-y-4 text-center max-w-2xl mx-auto">
+                        <Badge variant="gold">Phase 3 — Organisms</Badge>
+                        <Heading level="h1" variant="display">Page Sections</Heading>
+                        <Text variant="lead">High-level organisms that form the structure of our pages.</Text>
+                    </div>
+
+                    <div className="space-y-12">
+                        <Heading level="h2" variant="section" className="px-4">Hero Editorial Zone (70/30 Split)</Heading>
+                        <div className="border border-border/40 rounded-3xl overflow-hidden shadow-2xl">
+                            <HeroEditorialZone {...heroEditorialZoneMock} />
+                        </div>
+                    </div>
+                </section>
             </section>
         </div>
     );

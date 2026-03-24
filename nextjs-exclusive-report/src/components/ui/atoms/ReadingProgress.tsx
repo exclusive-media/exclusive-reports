@@ -1,7 +1,7 @@
 // src/components/ui/atoms/ReadingProgress.tsx
 'use client';
 
-import { useScroll, useSpring, useTransform, motion } from 'framer-motion';
+import { useScroll, useSpring, useTransform, m } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export function ReadingProgress() {
@@ -19,7 +19,7 @@ export function ReadingProgress() {
     if (!isMounted) return null;
 
     return (
-        <motion.div
+        <m.div
             className="fixed top-0 left-0 right-0 h-1 bg-accent origin-left z-50"
             style={{ scaleX }}
             aria-hidden="true" // decorative only

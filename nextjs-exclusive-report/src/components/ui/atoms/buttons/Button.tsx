@@ -2,8 +2,9 @@
 'use client';
 import { cn } from '@/lib/cn';
 import { Button as HeroButton, ButtonProps as HeroButtonProps } from '@heroui/react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { buttonMotionProps } from '@/lib/motion/button';
+import { m } from 'framer-motion';
+import { subtleHover, subtleTap } from '@/lib/motion/variants/interactionVariants';
+import { useSafeVariants } from '@/lib/motion/use-reduced-motion';
 import { forwardRef } from 'react';
 
 export interface ButtonProps extends Omit<HeroButtonProps, 'variant' | 'color'> {
@@ -26,7 +27,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         },
         ref
     ) => {
-        const prefersReducedMotion = useReducedMotion();
+        const variants = useSafeVariants({
+            hover: subtleHover,
+            tap: subtleTap
+        });
 
         const heroVariantMap: Record<string, HeroButtonProps['variant']> = {
             primary: 'primary',
@@ -61,15 +65,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             </HeroButton>
         );
 
-        if (!animate || prefersReducedMotion) return button;
+        if (!animate) return button;
 
         return (
-            <motion.div
+            <m.div
                 className={cn('inline-flex', fullWidth && 'w-full')}
-                {...buttonMotionProps}
+                whileHover="hover"
+                whileTap="tap"
+                variants={variants}
             >
                 {button}
-            </motion.div>
+            </m.div>
         );
     }
 );

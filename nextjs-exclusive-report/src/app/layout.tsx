@@ -6,8 +6,10 @@ import { draftMode } from "next/headers";
 import { ReadingProgress } from "@/components/ui/atoms/ReadingProgress";
 import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import { cn } from "@/lib/utils";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { Navbar } from "@/components/ui/organism/Nav/Navbar";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const libreBaskerville = Libre_Baskerville({
   weight: ['400', '700'],
@@ -49,9 +51,9 @@ export default async function RootLayout({
   const { isEnabled } = await draftMode();
 
   return (
-    <html 
-      lang="en" 
-      data-theme="ocean" 
+    <html
+      lang="en"
+      data-theme="ocean"
       suppressHydrationWarning
       className={cn(libreBaskerville.variable, playfairDisplay.variable, sourceSans.variable, notoEthiopic.variable, "font-sans", geist.variable)}
     >
@@ -73,14 +75,14 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col">
-        <ReadingProgress />
-        <header className="fixed top-6 right-6 z-[60]">
-          <ThemeSwitch />
-        </header>
-        <main className="flex-1">
-          {children}
-        </main>
-        {isEnabled && <VisualEditing />}
+        <MotionProvider>
+          <ReadingProgress />
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          {isEnabled && <VisualEditing />}
+        </MotionProvider>
       </body>
     </html>
   );

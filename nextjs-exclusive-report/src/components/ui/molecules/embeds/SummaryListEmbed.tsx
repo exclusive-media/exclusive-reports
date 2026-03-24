@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SummaryItem } from "@/sanity/types/article";
 import { Heading } from "@/components/ui/atoms/typography/Heading";
 import { Text } from "@/components/ui/atoms/typography/Text";
 import { Badge } from "@/components/ui/atoms/Metadata/Badge";
 import { Icon } from "@/components/ui/atoms/Icons/Icon";
+import { fadeInUp } from "@/lib/motion/variants/entryVariants";
+import { staggerContainer } from "@/lib/motion/variants/containerVariants";
+import { useSafeVariants } from "@/lib/motion/use-reduced-motion";
 
 interface SummaryListEmbedProps {
     title?: string;
@@ -15,13 +18,18 @@ interface SummaryListEmbedProps {
 }
 
 export function SummaryListEmbed({ title, items = [], className }: SummaryListEmbedProps) {
+    const entry = useSafeVariants(fadeInUp);
+    const stagger = useSafeVariants(staggerContainer);
+    const itemVariant = useSafeVariants(fadeInUp);
+
     if (!items || items.length === 0) return null;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <m.div
+            initial="initial"
+            whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
+            variants={entry}
             className={cn(
                 "my-12 p-6 sm:p-8 rounded-2xl bg-accent/5 border border-accent/10 shadow-sm relative overflow-hidden",
                 className
@@ -38,7 +46,7 @@ export function SummaryListEmbed({ title, items = [], className }: SummaryListEm
                         level="h3"
                         className="mb-6 pb-4 border-b border-border/40 text-foreground flex items-center gap-3 text-xl"
                     >
-                        <Badge variant="gold" className="rounded-md px-2 shadow-sm">
+                        <Badge animate={false} variant="gold" className="rounded-md px-2 shadow-sm">
                             <Icon name="Info" size={14} className="mr-1" />
                             Summary
                         </Badge>
@@ -46,14 +54,17 @@ export function SummaryListEmbed({ title, items = [], className }: SummaryListEm
                     </Heading>
                 )}
 
-                <ul className="space-y-4">
+                <m.ul 
+                    variants={stagger}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true }}
+                    className="space-y-4"
+                >
                     {items.map((item, index) => (
-                        <motion.li
+                        <m.li
                             key={index}
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                            variants={itemVariant}
                             className="flex items-start gap-4"
                         >
                             <div className="flex-shrink-0 mt-0.5">
@@ -71,10 +82,10 @@ export function SummaryListEmbed({ title, items = [], className }: SummaryListEm
                             <Text className="text-neutral-700 dark:text-neutral-300 leading-relaxed pt-1">
                                 {item.text}
                             </Text>
-                        </motion.li>
+                        </m.li>
                     ))}
-                </ul>
+                </m.ul>
             </div>
-        </motion.div>
+        </m.div>
     );
 }

@@ -2,10 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/atoms/Layout/Separator";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Heading } from "@/components/ui/atoms/typography/Heading";
 import { ArticleCard } from "./ArticleCard";
 import { Skeleton } from "@/components/ui/atoms/Layout/Skeleton";
+import { fadeInUp } from "@/lib/motion/variants/entryVariants";
+import { staggerContainer } from "@/lib/motion/variants/containerVariants";
+import { useSafeVariants } from "@/lib/motion/use-reduced-motion";
 
 interface RelatedArticlesListProps {
     articles: Array<{
@@ -24,21 +27,6 @@ interface RelatedArticlesListProps {
     variant?: "grid" | "vertical" | "compact";
 }
 
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export function RelatedArticlesList({
     articles,
     title = "Related Reading",
@@ -47,6 +35,8 @@ export function RelatedArticlesList({
     variant = "vertical",
 }: RelatedArticlesListProps) {
     const displayedArticles = articles.slice(0, maxItems);
+    const stagger = useSafeVariants(staggerContainer);
+    const item = useSafeVariants(fadeInUp);
 
     if (isLoading) {
         return <RelatedArticlesSkeleton variant={variant} count={maxItems} />;
@@ -67,10 +57,10 @@ export function RelatedArticlesList({
                 <Separator className="flex-1 opacity-20" />
             </div>
 
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
+            <m.div
+                variants={stagger}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
                 className={cn(
                     "grid gap-8",
@@ -78,17 +68,17 @@ export function RelatedArticlesList({
                         ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                         : "grid-cols-1",
                     variant === "compact" && "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-                ) }
+                )}
             >
-                {displayedArticles.map((article) => (
-                    <motion.div key={article.slug} variants={itemVariants}>
+                {displayedArticles.map((article, index) => (
+                    <m.div key={`${article.slug}-${index}`} variants={item}>
                         <ArticleCard
                             {...article}
                             variant={isGrid || variant === "vertical" ? "vertical" : "horizontal"}
                         />
-                    </motion.div>
+                    </m.div>
                 ))}
-            </motion.div>
+            </m.div>
         </section>
     );
 }

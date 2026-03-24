@@ -2,7 +2,7 @@
 'use client';
 import { cn } from '@/lib/cn';
 import { Button, ButtonProps } from '@heroui/react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { buttonMotionProps } from '@/lib/motion/button';
 import { forwardRef } from 'react';
 
@@ -31,9 +31,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         if (!animate || prefersReducedMotion) return button;
 
         return (
-            <motion.div className="inline-flex" {...buttonMotionProps}>
+            <m.div className="inline-flex" {...buttonMotionProps}>
                 {button}
-            </motion.div>
+            </m.div>
         );
     }
 );

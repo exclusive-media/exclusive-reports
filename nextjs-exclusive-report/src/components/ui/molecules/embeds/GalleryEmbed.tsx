@@ -2,9 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { urlForImage } from "@/sanity/client";
 import { Card } from "@/components/ui/atoms/Layout/Card";
+import { fadeInUp } from "@/lib/motion/variants/entryVariants";
+import { staggerContainer } from "@/lib/motion/variants/containerVariants";
+import { useSafeVariants } from "@/lib/motion/use-reduced-motion";
 
 interface GalleryImage {
     _key: string;
@@ -19,6 +22,10 @@ interface GalleryEmbedProps {
 }
 
 export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedProps) {
+    const entry = useSafeVariants(fadeInUp);
+    const stagger = useSafeVariants(staggerContainer);
+    const itemVariant = useSafeVariants(fadeInUp);
+
     if (!images || images.length === 0) return null;
 
     if (layout === "stacked") {
@@ -29,11 +36,12 @@ export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedP
                     if (!imageUrl) return null;
 
                     return (
-                        <motion.figure
+                        <m.figure
                             key={img._key}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial="initial"
+                            whileInView="animate"
                             viewport={{ once: true, margin: "-100px" }}
+                            variants={entry}
                             className="w-full"
                         >
                             <Card className="overflow-hidden shadow-sm border border-border/40">
@@ -50,7 +58,7 @@ export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedP
                                     {img.caption}
                                 </figcaption>
                             )}
-                        </motion.figure>
+                        </m.figure>
                     );
                 })}
             </div>
@@ -59,28 +67,22 @@ export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedP
 
     if (layout === "grid") {
         return (
-            <motion.div
+            <m.div
                 className="my-12"
-                initial="hidden"
-                whileInView="visible"
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true, margin: "-100px" }}
-                variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-                }}
+                variants={stagger}
             >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {images.map((img) => {
-                        const imageUrl = urlForImage(img);
+                        const imageUrl = urlForImage(img.image || img);
                         if (!imageUrl) return null;
 
                         return (
-                            <motion.figure
+                            <m.figure
                                 key={img._key}
-                                variants={{
-                                    hidden: { opacity: 0, scale: 0.95 },
-                                    visible: { opacity: 1, scale: 1 }
-                                }}
+                                variants={itemVariant}
                                 className="w-full"
                             >
                                 <Card className="overflow-hidden shadow-sm border border-border/40 h-full group">
@@ -98,17 +100,23 @@ export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedP
                                         {img.caption}
                                     </figcaption>
                                 )}
-                            </motion.figure>
+                            </m.figure>
                         );
                     })}
                 </div>
-            </motion.div>
+            </m.div>
         );
     }
 
     // Carousel Layout (Default)
     return (
-        <div className="my-12 relative w-full overflow-hidden">
+        <m.div 
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={entry}
+            className="my-12 relative w-full overflow-hidden"
+        >
             <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 scrollbar-hide">
                 {images.map((img) => {
                     const imageUrl = urlForImage(img.image);
@@ -140,6 +148,7 @@ export function GalleryEmbed({ images = [], layout = "carousel" }: GalleryEmbedP
             </div>
             {/* Simple gradient hint for scrollability */}
             <div className="absolute top-0 right-0 bottom-6 w-12 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-        </div>
+        </m.div>
     );
 }
+

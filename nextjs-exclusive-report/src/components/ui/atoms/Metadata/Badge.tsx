@@ -1,5 +1,11 @@
+"use client";
+
 // src/components/ui/atoms/Metadata/Badge.tsx
+import React from 'react';
 import { cn } from '@/lib/cn';
+import { m } from 'framer-motion';
+import { fadeInUp } from '@/lib/motion/variants/entryVariants';
+import { useSafeVariants } from '@/lib/motion/use-reduced-motion';
 
 export interface BadgeProps {
     variant?: 'gold' | 'muted' | 'default' | 'soft';
@@ -21,15 +27,16 @@ export interface BadgeProps {
  * - default  → foreground/default surface
  * - soft     → very light background with muted text
  */
-import React from 'react';
-
 export function Badge({
     variant = 'default',
     size = 'md',
     uppercase = true,
+    animate = true,
     className,
     children,
-}: BadgeProps) {
+}: BadgeProps & { animate?: boolean }) {
+    const variants = useSafeVariants(fadeInUp);
+
     const sizeClasses = {
         sm: 'text-[10px] px-2 py-0.5',
         md: 'text-xs px-2.5 py-0.5',
@@ -43,7 +50,7 @@ export function Badge({
         soft: 'bg-default/50 text-muted',
     };
 
-    return (
+    const badge = (
         <span
             className={cn(
                 'inline-flex items-center font-medium tracking-wide rounded',
@@ -55,6 +62,20 @@ export function Badge({
         >
             {children}
         </span>
+    );
+
+    if (!animate) return badge;
+
+    return (
+        <m.span
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={variants}
+            className="inline-flex"
+        >
+            {badge}
+        </m.span>
     );
 }
 

@@ -6,7 +6,7 @@ import {
     CardProps as HeroCardProps,
 } from '@heroui/react';
 import { forwardRef } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 
 export interface CardProps extends Omit<HeroCardProps, 'variant'> {
     variant?: 'default' | 'featured' | 'transparent' | 'hover-lift';
@@ -52,13 +52,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         if (!animate || prefersReducedMotion) return card;
 
         return (
-            <motion.div
+            <m.div
                 whileHover={{ scale: hoverScale }}
                 transition={{ type: 'spring', stiffness: 300, damping: 28 }}
                 className="block"
             >
                 {card}
-            </motion.div>
+            </m.div>
         );
     }
 );

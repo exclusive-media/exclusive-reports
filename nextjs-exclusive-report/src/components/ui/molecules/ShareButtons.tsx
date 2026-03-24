@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { IconButton } from "@/components/ui/atoms/buttons/IconButton";
 import { Icon } from "@/components/ui/atoms/Icons/Icon";
 import { cn } from "@/lib/utils";
@@ -71,23 +71,23 @@ export function ShareButtons({
             >
                 <AnimatePresence mode="wait">
                     {copied ? (
-                        <motion.span
+                        <m.span
                             key="check"
                             initial={{ scale: 0.5, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.5, opacity: 0 }}
                         >
                             <Icon name="Check" size={20} className="text-gold" />
-                        </motion.span>
+                        </m.span>
                     ) : (
-                        <motion.span
+                        <m.span
                             key="link"
                             initial={{ scale: 0.5, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.5, opacity: 0 }}
                         >
                             <Icon name="Link" size={20} />
-                        </motion.span>
+                        </m.span>
                     )}
                 </AnimatePresence>
             </IconButton>
@@ -95,11 +95,11 @@ export function ShareButtons({
             <IconButton
                 aria-label="Native Share"
                 onClick={() => {
-                     if (navigator.share) {
-                         navigator.share({ title, url }).catch(console.error);
-                     } else {
-                         handleCopyLink();
-                     }
+                    if (navigator.share) {
+                        navigator.share({ title, url }).catch(console.error);
+                    } else {
+                        handleCopyLink();
+                    }
                 }}
                 className="text-muted hover:text-accent border-transparent hover:bg-accent/5 md:hidden"
                 size="md"

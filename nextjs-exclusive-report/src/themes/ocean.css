@@ -19,7 +19,7 @@
         --accent-foreground: oklch(0.9911 0 0);
         --background: #FBFAF7;
         --background-secondary: oklch(97.02% 0.0000 17.07);
-        --border: oklch(90.00% 0.0000 17.07);
+        --border: oklch(0.00% 0.0000 0.00%);
         --danger: oklch(0.5392 0.1816 33.72);
         --danger-foreground: oklch(0.9911 0 0);
         --default: oklch(94.00% 0.0000 17.07);
@@ -48,7 +48,7 @@
         --warning-foreground: oklch(0.9911 0 0);
 
         /* Border Radius */
-        --radius: 0.5rem;
+        --radius: 0rem;
         --field-radius: 0.75rem;
 
         /* Font Family */

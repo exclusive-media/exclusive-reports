@@ -5,7 +5,7 @@
 
 import { Switch } from '@heroui/react';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/cn';
 
 // Inline SVG atoms — no static asset dependency
@@ -75,7 +75,7 @@ export function ThemeSwitch() {
                 {/* Day label */}
                 <AnimatePresence initial={false}>
                     {!isDark && (
-                        <motion.span
+                        <m.span
                             key="day-label"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -84,14 +84,14 @@ export function ThemeSwitch() {
                             className="absolute left-14 text-[10px] font-bold tracking-[0.12em] uppercase text-[#111] pointer-events-none"
                         >
                             DAYMODE
-                        </motion.span>
+                        </m.span>
                     )}
                 </AnimatePresence>
 
                 {/* Night label */}
                 <AnimatePresence initial={false}>
                     {isDark && (
-                        <motion.span
+                        <m.span
                             key="night-label"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -100,12 +100,12 @@ export function ThemeSwitch() {
                             className="absolute right-14 text-[11px] font-bold tracking-[0.12em] uppercase text-white pointer-events-none"
                         >
                             NIGHTMODE
-                        </motion.span>
+                        </m.span>
                     )}
                 </AnimatePresence>
 
                 {/* Sliding thumb */}
-                <motion.span
+                <m.span
                     layout
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     className={cn(
@@ -117,7 +117,7 @@ export function ThemeSwitch() {
                     )}
                 >
                     <AnimatePresence mode="wait" initial={false}>
-                        <motion.span
+                        <m.span
                             key={isDark ? 'moon' : 'sun'}
                             initial={{ scale: 0.5, opacity: 0, rotate: -30 }}
                             animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -126,9 +126,9 @@ export function ThemeSwitch() {
                             className="flex items-center justify-center"
                         >
                             {isDark ? <MoonIcon /> : <SunIcon />}
-                        </motion.span>
+                        </m.span>
                     </AnimatePresence>
-                </motion.span>
+                </m.span>
             </span>
         </label>
     );

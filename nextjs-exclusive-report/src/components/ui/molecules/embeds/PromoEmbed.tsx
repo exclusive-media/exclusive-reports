@@ -1,28 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
 import { Heading } from "@/components/ui/atoms/typography/Heading";
 import { Text } from "@/components/ui/atoms/typography/Text";
-import { Button } from "@heroui/react";
+import { Button } from "@/components/ui/atoms/buttons/Button";
 import { Icon } from "@/components/ui/atoms/Icons/Icon";
 import Link from "next/link";
 import { PromoBlock } from "@/sanity/types/article";
+import { fadeInUp } from "@/lib/motion/variants/entryVariants";
+import { subtleHover, subtleTap } from "@/lib/motion/variants/interactionVariants";
+import { useSafeVariants } from "@/lib/motion/use-reduced-motion";
 
 export function PromoEmbed({ title, description, image, link, buttonText, variant = 'primary' }: PromoBlock) {
     const imageUrl = image ? urlForImage(image) : null;
-
     const isPrimary = variant === 'primary';
 
+    const entryVariants = useSafeVariants(fadeInUp);
+    const interactionVariants = useSafeVariants({
+        hover: subtleHover,
+        tap: subtleTap
+    });
+
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <m.div
+            initial="initial"
+            whileInView="animate"
+            whileHover="hover"
+            whileTap="tap"
             viewport={{ once: true, margin: "-100px" }}
+            variants={{
+                ...entryVariants,
+                ...interactionVariants
+            }}
             className={cn(
-                "my-12 overflow-hidden rounded-2xl border shadow-sm transition-shadow hover:shadow-md",
+                "my-12 overflow-hidden rounded-2xl border shadow-sm transition-shadow",
                 isPrimary 
                     ? "bg-accent/5 border-accent/20" 
                     : "bg-muted/30 border-border"
@@ -60,9 +74,10 @@ export function PromoEmbed({ title, description, image, link, buttonText, varian
                     <Link href={link || "#"} className="w-full sm:w-auto block">
                         <Button
                             size="lg"
+                            variant={isPrimary ? "gold" : "ghost"}
                             className={cn(
                                 "font-semibold tracking-wide w-full flex items-center justify-center gap-2",
-                                isPrimary ? "bg-accent text-accent-foreground shadow-lg shadow-accent/20" : "bg-transparent border-2 border-foreground/20 text-foreground hover:bg-muted"
+                                !isPrimary && "border-2 border-foreground/20 text-foreground hover:bg-muted"
                             )}
                         >
                             {buttonText}
@@ -77,11 +92,11 @@ export function PromoEmbed({ title, description, image, link, buttonText, varian
                             src={imageUrl}
                             alt={title || "Promo"}
                             fill
-                            className="object-cover"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                     </div>
                 )}
             </div>
-        </motion.div>
+        </m.div>
     );
 }
