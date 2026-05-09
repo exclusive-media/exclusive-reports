@@ -12,21 +12,20 @@ import { SearchMegaMenu } from "./SearchMegaMenu";
 import { Logo } from "@/components/ui/atoms/Logo";
 
 const NAV_ITEMS = [
-    { label: "Business", href: "/category/business" },
-    { label: "Politics", href: "/category/politics" },
-    { label: "Technology", href: "/category/technology" },
-    { label: "Africa", href: "/category/africa" },
-    { label: "Markets", href: "/category/markets" },
+    { label: "Business", href: "/business" },
+    { label: "Politics", href: "/politics" },
+    { label: "Technology", href: "/technology" },
+    { label: "Africa", href: "/africa" },
 ];
 
 export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { scrollY } = useScroll();
-    
+
     // Logo scaling: scale from 1 to 0.8 when scrolling from 0 to 100px
     const logoScale = useTransform(scrollY, [0, 100], [1, 0.8]);
     const logoY = useTransform(scrollY, [0, 100], [0, -5]);
-    
+
     // Sticky state for blur effects
     const [isSticky, setIsSticky] = useState(false);
     useEffect(() => {
@@ -40,7 +39,7 @@ export function Navbar() {
 
     return (
         <>
-            <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+            <header className="global-navbar fixed top-0 left-0 w-full z-50 transition-all duration-300">
                 {/* Row 1: Top Bar (Logo, Menu Trigger, CTA) */}
                 <div className={cn(
                     "relative py-4 md:py-6 transition-all duration-500 border-b border-white/0",
@@ -64,7 +63,7 @@ export function Navbar() {
                         </div>
 
                         {/* Center: Brand Identity */}
-                        <m.div 
+                        <m.div
                             style={{ scale: logoScale, y: logoY }}
                             className="absolute left-1/2 -translate-x-1/2 text-center"
                         >
@@ -72,11 +71,10 @@ export function Navbar() {
                         </m.div>
 
                         {/* Right: Actions */}
-                        <div className="flex items-center gap-6">
-                            <div className="hidden lg:block">
-                                <ThemeSwitch />
-                            </div>
-                            <Link href="/subscribe">
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <ThemeSwitch variant="minimal" />
+
+                            <Link href="/subscribe" className="hidden lg:block">
                                 <button className="px-5 py-2.5 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded-sm hover:bg-gold hover:text-zinc-950 transition-all shadow-xl">
                                     Subscribe
                                 </button>
@@ -113,9 +111,9 @@ export function Navbar() {
             {/* Full-screen Overlay */}
             <AnimatePresence>
                 {isMenuOpen && (
-                    <SearchMegaMenu 
-                        isOpen={isMenuOpen} 
-                        onClose={() => setIsMenuOpen(false)} 
+                    <SearchMegaMenu
+                        isOpen={isMenuOpen}
+                        onClose={() => setIsMenuOpen(false)}
                         navItems={NAV_ITEMS}
                     />
                 )}

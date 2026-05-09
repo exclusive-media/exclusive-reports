@@ -27,7 +27,7 @@ export interface ArticleCardProps {
     author?: { name: string; role?: string; image?: string };
     publishedAt: string | Date;
     readingTime?: number;
-    variant?: "vertical" | "featured" | "horizontal" | "minimal";
+    variant?: "vertical" | "featured" | "horizontal" | "minimal" | "naked";
     isLoading?: boolean;
 }
 
@@ -53,6 +53,7 @@ export function ArticleCard({
     const isFeatured = variant === "featured";
     const isHorizontal = variant === "horizontal";
     const isMinimal = variant === "minimal";
+    const isNaked = variant === "naked";
 
     const articleSlug = typeof slug === "string" ? slug : (slug as any)?.current;
 
@@ -129,8 +130,9 @@ export function ArticleCard({
                 <Card
                     variant={isFeatured ? "featured" : "default"}
                     className={cn(
-                        "h-full overflow-hidden border-border/0 bg-card shadow-sm transition-shadow duration-300",
-                        "group-hover:shadow-md group-hover:border-accent/30",
+                        "h-full overflow-hidden transition-shadow duration-300",
+                        !isNaked && "border-border/0 bg-card shadow-sm group-hover:shadow-md group-hover:border-accent/30",
+                        isNaked && "bg-transparent border-none shadow-none rounded-none",
                         isHorizontal && "flex flex-row gap-6"
                     )}
                 >
@@ -162,7 +164,7 @@ export function ArticleCard({
 
                     {/* Content */}
                     <div className={cn("flex flex-col", isHorizontal && "flex-1")}>
-                        <CardHeader className={cn("pb-2", isHorizontal && "pt-0")}>
+                        <CardHeader className={cn("pb-2", isHorizontal && "pt-0", isNaked && "px-0 pt-4")}>
                             <div className="flex flex-wrap items-center gap-2">
                                 {/* Time label for other variants if within 24h? User only mentioned it for the new variation, but we could add it to others too. I'll stick to DateStamp for now to maintain existing style. */}
                                 {format && (
@@ -196,7 +198,7 @@ export function ArticleCard({
                             {dek && <Dek className="mt-2 line-clamp-2 md:line-clamp-3">{dek}</Dek>}
                         </CardHeader>
 
-                        <CardFooter className="mt-auto pt-4">
+                        <CardFooter className={cn("mt-auto pt-4", isNaked && "px-0 pb-0")}>
                             <div className="flex flex-wrap items-center justify-between gap-4 w-full">
                                 {author && (
                                     <AuthorMeta

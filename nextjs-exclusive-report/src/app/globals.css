@@ -59,3 +59,18 @@
 body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* ============================================= */
+/* Utility: Hide native scrollbar                */
+/* ============================================= */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================= */
+/* Header Transitions                            */
+/* ============================================= */
+/* When sticky category nav is active, slide main navbar up completely */
+html.category-subnav-active .global-navbar {
+  transform: translateY(-100%);
+  pointer-events: none;
+}

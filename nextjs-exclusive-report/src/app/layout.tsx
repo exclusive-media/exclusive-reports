@@ -8,6 +8,7 @@ import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import { cn } from "@/lib/utils";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Navbar } from "@/components/ui/organism/Nav/Navbar";
+import { Footer } from "@/components/ui/organism/Nav/Footer";
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -78,9 +79,10 @@ export default async function RootLayout({
         <MotionProvider>
           <ReadingProgress />
           <Navbar />
-          <main>
+          <main className="flex-grow">
             {children}
           </main>
+          <Footer />
           {isEnabled && <VisualEditing />}
         </MotionProvider>
       </body>

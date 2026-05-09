@@ -211,12 +211,6 @@ export function SearchMegaMenu({ isOpen, onClose, navItems }: SearchMegaMenuProp
                         </div>
 
                         <div className="mt-20 pt-10 border-t border-zinc-800/50">
-                            {/* Theme Switch for Mobile */}
-                            <div className="md:hidden mb-12">
-                                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-500 mb-4 block">PREFERENCE</span>
-                                <ThemeSwitch />
-                            </div>
-
                             <p className="text-[10px] text-zinc-500 italic mb-6">"Power room journalism for those who drive Africa's markets."</p>
                             <div className="flex gap-4">
                                 <Icon name="Twitter" size={18} className="text-zinc-400 hover:text-white cursor-pointer" />
