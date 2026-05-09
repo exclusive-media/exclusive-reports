@@ -1,7 +1,5 @@
 // src/components/templates/StandardEditorialLayout.tsx
 
-
-import { m } from "framer-motion"
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { TwoColumnSplit } from "@/components/layouts/TwoColumnSplit";
 import { SectionContainer } from "@/components/layouts/SectionContainer";

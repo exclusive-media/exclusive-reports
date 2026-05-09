@@ -1,5 +1,4 @@
 // src/components/templates/SpotlightLayout.tsx
-"use client";
 
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { SectionContainer } from "@/components/layouts/SectionContainer";
@@ -37,9 +36,9 @@ export function SpotlightLayout({
 
       {/* Immersive Category Hero */}
       {/* Note: Passing layoutType="SPOTLIGHT" to CategoryHeroServer tells it to render the "spotlight" layout variant. */}
-      <CategoryHeroServer 
-        categoryName={categoryName} 
-        description={description} 
+      <CategoryHeroServer
+        categoryName={categoryName}
+        description={description}
         layoutType={layoutType}
       />
 
@@ -51,9 +50,9 @@ export function SpotlightLayout({
             <LatestCategoryFeedServer categorySlug={slug} categoryName={categoryName} variant="grid" />
 
             {/* Immersive Cinematic Grid */}
-             <div className="pt-12 border-t border-border/20">
-                <AnalysisGridServer categoryName={categoryName} variant="equal-grid" />
-             </div>
+            <div className="pt-12 border-t border-border/20">
+              <AnalysisGridServer categoryName={categoryName} variant="equal-grid" />
+            </div>
           </div>
         </PageContainer>
       </SectionContainer>
@@ -61,7 +60,7 @@ export function SpotlightLayout({
       {/* Deep-dive Newsletter Block Focus */}
       <SectionContainer className="bg-zinc-950 py-24 border-t border-white/5">
         <PageContainer maxWidth="md">
-            <CategoryNewsletterCTA categoryName={categoryName} variant="boxed" />
+          <CategoryNewsletterCTA categoryName={categoryName} variant="boxed" />
         </PageContainer>
       </SectionContainer>
 

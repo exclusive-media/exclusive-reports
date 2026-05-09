@@ -1,5 +1,4 @@
 // src/components/templates/IndexLayout.tsx
-"use client";
 
 import { PageContainer } from "@/components/layouts/PageContainer";
 import { SectionContainer } from "@/components/layouts/SectionContainer";
@@ -18,13 +17,13 @@ import { CategoryPageProps } from "./types";
  * Notes: Passing layoutType="INDEX" signals the CategoryHeroServer to render the "minimal" 
  * variant, which strips out large images in favor of precise typography and quick utility.
  */
-export function IndexLayout({ 
-  categoryName, 
+export function IndexLayout({
+  categoryName,
   description,
   layoutType,
   slug,
   subcategories,
-  articles 
+  articles
 }: CategoryPageProps) {
   return (
     <article className="min-h-screen">
@@ -37,16 +36,16 @@ export function IndexLayout({
       />
 
       {/* Minimal Category Hero */}
-      <CategoryHeroServer 
-        categoryName={categoryName} 
-        description={description} 
+      <CategoryHeroServer
+        categoryName={categoryName}
+        description={description}
         layoutType={layoutType}
       />
 
       <SectionContainer paddingY="lg">
         <PageContainer maxWidth="lg">
           <SubcategoryHighlightsServer categorySlug="markets" categoryName={categoryName} variant="cards" />
-          
+
           <div className="mt-16 mb-16">
             <LatestCategoryFeedServer categorySlug={slug} categoryName={categoryName} variant="list" />
           </div>
@@ -54,7 +53,7 @@ export function IndexLayout({
           <CategoryNewsletterCTA categoryName={categoryName} variant="inline" />
         </PageContainer>
       </SectionContainer>
-      
+
     </article>
   );
 }
